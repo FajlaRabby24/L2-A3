@@ -159,3 +159,8 @@ where not  exists (
   from bookings as b
   where b.vehicle_id = v.vehicle_id
 );
+
+
+-- Query 3: WHERE
+select * from vehicles
+where type = 'car' and status = 'available';
