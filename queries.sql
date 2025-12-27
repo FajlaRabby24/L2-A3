@@ -149,3 +149,13 @@ values
 -- query 1: JOIN
 select booking_id, u.name as customer_name, v.name as vehicle_name, start_date, end_date, b.status from bookings as b
 join users as u using(user_id) join vehicles as v using (vehicle_id);
+
+
+-- Query 2: EXISTS
+select *
+from vehicles as v
+where not  exists (
+  select *
+  from bookings as b
+  where b.vehicle_id = v.vehicle_id
+);
