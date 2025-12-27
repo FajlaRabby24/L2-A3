@@ -49,12 +49,55 @@ create table
   vehicles (
     vehicle_id serial primary key,
     name varchar(150) not null,
-    type
-      vehicle_type not null,
-      model varchar(20) not null,
-      registration_number varchar(50) not null,
-      rental_price int not null,
-      status vehicle_status not null
+    type vehicle_type not null,
+    model varchar(20) not null,
+    registration_number varchar(50) unique not null,
+    rental_price int not null,
+    status vehicle_status not null
+  );
+
+-- insert
+insert into
+  vehicles (
+    name,
+    type,
+    model,
+    registration_number,
+    rental_price,
+    status
+  )
+values
+  (
+    'Toyota Corolla',
+    'car',
+    '2022',
+    'ABC-123',
+    '50',
+    'available'
+  ),
+  (
+    'Honda Civic',
+    'car',
+    '2021',
+    'DEF-456',
+    '60',
+    'rented'
+  ),
+  (
+    'Yamaha R15',
+    'bike',
+    '2023',
+    'GHI-789',
+    '30',
+    'available'
+  ),
+  (
+    'Ford F-150',
+    'truck',
+    '2020',
+    'JKL-012',
+    '100',
+    'maintenance'
   );
 
 -- create booking table
