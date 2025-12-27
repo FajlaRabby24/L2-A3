@@ -12,6 +12,32 @@ create table
     role user_role not null default 'Customer'
   );
 
+-- insert 
+insert into
+  users (name, email, password, phone, role)
+values
+  (
+    'Alice',
+    'alice@gmail.com',
+    '123asd',
+    '+8801307495864',
+    'Admin'
+  ),
+  (
+    'Bob',
+    'bob@gmail.com',
+    '123asd',
+    '+8801307495864',
+    'Customer'
+  ),
+  (
+    'Charlie',
+    'charlie@gmail.com',
+    '123asd',
+    '+8801307495864',
+    'Customer'
+  );
+
 -- create vehicle table
 create type
   vehicle_type as enum('car', 'bike', 'truck');
