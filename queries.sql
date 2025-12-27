@@ -144,3 +144,8 @@ values
   ),
   (3, 2, '2023-12-01', '2023-12-02', 'confirmed', 60),
   (1, 1, '2023-12-10', '2023-12-12', 'pending', 100);
+
+
+-- query 1: JOIN
+select booking_id, u.name as customer_name, v.name as vehicle_name, start_date, end_date, b.status from bookings as b
+join users as u using(user_id) join vehicles as v using (vehicle_id);
