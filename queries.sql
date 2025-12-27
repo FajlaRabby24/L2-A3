@@ -1,6 +1,7 @@
- -- create users table
+-- create users table
 create type
   user_role as enum('Admin', 'Customer');
+
 
 create table
   users (
@@ -154,7 +155,7 @@ join users as u using(user_id) join vehicles as v using (vehicle_id);
 -- Query 2: EXISTS
 select *
 from vehicles as v
-where not  exists (
+where not exists (
   select *
   from bookings as b
   where b.vehicle_id = v.vehicle_id
@@ -167,27 +168,6 @@ where type = 'car' and status = 'available';
 
 
 -- Query 4: GROUP BY and HAVING
--- worst way
-create function
-  get_vehicle (id int) returns varchar(100) language sql as $$
-  select name from vehicles where vehicle_id = id;
-$$;
-
-select
-  (
-    select
-      get_vehicle (v.vehicle_id)
-  ) vehicle_name,
-  count(*) total_bookings
-from
-  bookings b
-  join vehicles v on b.vehicle_id = v.vehicle_id
-group by
-  v.vehicle_id
-having
-  count(*) > 2;
-
--- efficient way
 select
   v.name vehicle_name,
   count(*) total_bookings
