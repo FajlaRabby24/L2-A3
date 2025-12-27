@@ -164,3 +164,37 @@ where not  exists (
 -- Query 3: WHERE
 select * from vehicles
 where type = 'car' and status = 'available';
+
+
+-- Query 4: GROUP BY and HAVING
+-- worst way
+create function
+  get_vehicle (id int) returns varchar(100) language sql as $$
+  select name from vehicles where vehicle_id = id;
+$$;
+
+select
+  (
+    select
+      get_vehicle (v.vehicle_id)
+  ) vehicle_name,
+  count(*) total_bookings
+from
+  bookings b
+  join vehicles v on b.vehicle_id = v.vehicle_id
+group by
+  v.vehicle_id
+having
+  count(*) > 2;
+
+-- efficient way
+select
+  v.name vehicle_name,
+  count(*) total_bookings
+from
+  bookings b
+  join vehicles v using (vehicle_id)
+group by
+  v.vehicle_id, v.name
+having
+  count(*) > 2;
