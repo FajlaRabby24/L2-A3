@@ -4,7 +4,7 @@ create type
 
 create table
   users (
-    user_id uuid primary key,
+    user_id serial primary key,
     name varchar(100) not null,
     email varchar(100) unique not null,
     password varchar(30) not null,
@@ -21,7 +21,7 @@ create type
 
 create table
   vehicles (
-    vehicle_id uuid primary key,
+    vehicle_id serial primary key,
     name varchar(150) not null,
     type
       vehicle_type not null,
@@ -37,9 +37,9 @@ create type
 
 create table
   bookings (
-    booking_id uuid primary key,
-    user_id uuid not null references users (user_id),
-    vehicle_id uuid not null references vehicles (vehicle_id),
+    booking_id serial primary key,
+    user_id int not null references users (user_id),
+    vehicle_id int not null references vehicles (vehicle_id),
     start_date date not null default now(),
     end_date date not null,
     status booking_status not null default 'pending',
